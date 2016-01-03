@@ -11,6 +11,10 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'sheerun/vim-polyglot'
+Plug 'Raimondi/delimitMate'
+Plug 'janko-m/vim-test'
+Plug 'benekastah/neomake'
+Plug 'kshenoy/vim-signature'
 
 call plug#end()
 
@@ -81,6 +85,16 @@ vnoremap // y/<C-R>"<CR>
 map <C-n> :NERDTreeToggle<CR>
 map <C-m> :NERDTreeFind<CR>
 
+"test vim
+nmap <silent> <leader>to :TestNearest<CR>
+nmap <silent> <leader>tf :TestFile<CR>
+nmap <silent> <leader>ta :TestSuite<CR>
+nmap <silent> <leader>tt :TestLast<CR>
+
+"grepper
+nnoremap <leader>f :Grepper! -tool ag  -open -switch<cr>
+nnoremap <leader>* :Grepper! -tool ag -cword<cr>
+
 "PLUGINS
 
 "airline
@@ -101,8 +115,7 @@ let g:airline_section_y = ''
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#tabline#show_buffers = 0
-
-
+let g:airline#extensions#hunks#enabled = 0
 
 "ctrlp
 let g:ctrlp_working_path_mode = 0 "ctrlp does not change dirs
@@ -118,3 +131,10 @@ let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
 
 "indentLine
 let g:indentLine_char = '·'
+
+"test-vim
+let test#strategy = 'neovim'
+let test#javascript#mocha#options = '--compilers js:babel-register'
+
+"neomake
+autocmd! BufWritePost,BufReadPost * Neomake

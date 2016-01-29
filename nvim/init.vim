@@ -137,4 +137,7 @@ let test#strategy = 'neovim'
 let test#javascript#mocha#options = '--compilers js:babel-register'
 
 "neomake
+if filereadable(glob(".eslintrc.*"))
+  let g:neomake_javascript_enabled_makers = ['eslint']
+endif
 autocmd! BufWritePost,BufReadPost * Neomake

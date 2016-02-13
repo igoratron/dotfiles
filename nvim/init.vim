@@ -6,6 +6,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'mattn/emmet-vim'
 Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -15,6 +16,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'janko-m/vim-test'
 Plug 'benekastah/neomake'
 Plug 'kshenoy/vim-signature'
+Plug 'SirVer/ultisnips'
 
 call plug#end()
 
@@ -45,6 +47,15 @@ set breakindent
 "disable swap
 :set noswapfile
 
+"keep undo history across sessions by storing it in a file
+if !isdirectory($HOME . "/.config/nvim/undo")
+    call mkdir($HOME . "/.config/nvim/undo", "p")
+endif
+set undofile                " Save undo's after file closes
+set undodir=$HOME/.vim/undo " where to save undo histories
+set undolevels=1000         " How many undos
+set undoreload=10000        " number of lines to save for undo
+
 "disable link underline
 :hi link htmlLink NONE
 
@@ -58,6 +69,12 @@ syntax on
 
 "don't split words on wrap
 set linebreak
+
+"autocommands
+autocmd FileType gitcommit setlocal spell
+
+
+"
 
 "mappings
 "
@@ -81,9 +98,19 @@ nnoremap <C-h> :tabp<CR>
 "search for visually selected word
 vnoremap // y/<C-R>"<CR>
 
+"disable search highlight
+nmap <leader>h :noh<CR>
+
+"exit insert mode in terminal
+tnoremap <leader>te <C-\><C-n>
+
 "nerdtree
 map <C-n> :NERDTreeToggle<CR>
 map <C-m> :NERDTreeFind<CR>
+
+let g:NERDTreeMapOpenSplit = '<C-s>'
+let g:NERDTreeMapOpenVSplit = '<C-v>'
+let g:NERDTreeMapOpenInTab = '<C-t>'
 
 "test vim
 nmap <silent> <leader>to :TestNearest<CR>
@@ -92,8 +119,8 @@ nmap <silent> <leader>ta :TestSuite<CR>
 nmap <silent> <leader>tt :TestLast<CR>
 
 "grepper
-nnoremap <leader>f :Grepper! -tool ag  -open -switch<cr>
-nnoremap <leader>* :Grepper! -tool ag -cword<cr>
+nnoremap <leader>f  :Grepper -tool ag  -grepprg ag --vimgrep<cr>
+nnoremap <leader>*   :Grepper -tool ag -cword -noprompt<cr>
 
 "PLUGINS
 
@@ -141,3 +168,7 @@ if filereadable(glob(".eslintrc.*"))
   let g:neomake_javascript_enabled_makers = ['eslint']
 endif
 autocmd! BufWritePost,BufReadPost * Neomake
+
+"ultisnips
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"

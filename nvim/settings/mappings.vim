@@ -30,6 +30,12 @@ nmap <leader>h :noh<CR>
 
 "exit insert mode in terminal
 tnoremap <leader>te <C-\><C-n>
+"
+"open vimrc in new tab
+nmap <leader>v :tabedit $MYVIMRC<CR>
+
+"fold
+nmap <leader>zc :setlocal fdm=indent<CR>
 
 " ====================
 " plugins
@@ -52,3 +58,4 @@ nmap <silent> <leader>to :TestNearest<CR>
 nmap <silent> <leader>tf :TestFile<CR>
 nmap <silent> <leader>ta :TestSuite<CR>
 nmap <silent> <leader>tt :TestLast<CR>
+nmap <silent> <leader>tz let test#ruby#rspec#executable = 'zeus rspec'<CR>

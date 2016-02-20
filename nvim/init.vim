@@ -34,13 +34,11 @@ set linebreak
 set list
 set listchars=trail:˽,extends:⋯,precedes:⋯,tab:>-
 set number
-set relativenumber
 
 " =====================================
 " syntax, highlighting and spelling
 " =====================================
 set background=dark
-set cursorline "highlight the screen line of the cursor
 syntax on
 
 " =====================================
@@ -78,6 +76,19 @@ colorscheme solarized
 " =====================================
 autocmd FileType gitcommit setlocal spell
 autocmd! BufWritePost,BufReadPost * Neomake
+autocmd bufwritepost .vimrc source $MYVIMRC
+augroup CursorLine
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  au WinLeave * setlocal nocursorline
+augroup END
+
+augroup LineNumbers
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal relativenumber
+  au WinLeave * setlocal norelativenumber
+augroup END
+
 
 so ~/.config/nvim/settings/mappings.vim
 so ~/.config/nvim/settings/plugins.vim

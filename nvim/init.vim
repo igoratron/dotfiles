@@ -17,6 +17,8 @@ Plug 'janko-m/vim-test'
 Plug 'benekastah/neomake'
 Plug 'kshenoy/vim-signature'
 Plug 'SirVer/ultisnips'
+Plug 'tpope/vim-commentary'
+Plug 'wellle/targets.vim'
 
 call plug#end()
 

@@ -8,7 +8,7 @@
 	email = igor.czerwinski@fundingcircle.com
 [core]
 	excludesfile = /Users/igorczerwinski/.gitignore
-	editor = vim
+	editor = nvim
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 

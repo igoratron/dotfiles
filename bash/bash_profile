@@ -64,20 +64,20 @@ function parse_git_dirty {
 }
 
 function show_jobs() {
-  echo `jobs | sed -n -E 's/^\[([0-9])\]. +[a-zA-Z]+ +(.+)$/\1:\2/p' | tr '\n' ' '`
+  echo `jobs | sed -n -E 's/^\[([0-9])\]. +[a-zA-Z]+ +(.+)$/\1:\2/p' | tr '\n' ' ' | awk '{print "[ "$0"]"}'`
 }
 
 export PROJECTS_DIR=~/Development/fc
 
-export PS1="\[\e[1;36m\]\w\[\e[m\] \[\e[1;32m\]\`node_version\`\[\e[m\] \[\e[1;32m\]\`parse_git_branch\` [\`show_jobs\`]\[\e[1;36m\]\n\\$ "
+export PS1="\w \e[90m\`parse_git_branch\` \`show_jobs\`\e[0m\n\\$ "
 export PROMPT_COMMAND='echo -ne "\033]0;${PWD##*/}\007"'
 export VISUAL=nvim
 export EDITOR="$VISUAL"
+export GIT_EDITOR=nvim
 
-alias deploy_to=_deploy_to
 alias gitgraph="git log --graph --all --decorate --oneline"
-alias static_deploy="NODE_ENV=uat DEPLOY_USER=root SERVER=mickeymania.fcuat.co.uk gulp deploy"
 alias vim="nvim"
+alias compose="docker-compose"
 
 export POCKET_KEY=46462-3c0e5926fd11ca22c6eac040
 export READABILITY_KEY=a8bdf1825ad4dd57c24a90cd57591335e4bbffdc

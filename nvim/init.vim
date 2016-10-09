@@ -1,5 +1,5 @@
 call plug#begin('~/.config/nvim/plugins')
-
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'scrooloose/nerdtree'
 Plug 'mhinz/vim-grepper'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -19,6 +19,21 @@ Plug 'kshenoy/vim-signature'
 Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-commentary'
 Plug 'wellle/targets.vim'
+Plug 'chriskempson/base16-vim'
+Plug 'othree/jspc.vim', { 'for': 'javascript'}
+Plug 'carlitux/deoplete-ternjs', { 'for': 'javascript'}
+Plug 'ternjs/tern_for_vim', { 'for': 'javascript'}
+Plug 'yssl/QFEnter'
+Plug 'sjl/gundo.vim'
+Plug 'junegunn/vim-peekaboo'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'tpope/vim-classpath', { 'for': 'clojure' }
+Plug 'tpope/vim-leiningen', { 'for': 'clojure' }
+Plug 'tpope/vim-projectionist', { 'for': 'clojure' }
+Plug 'tpope/vim-dispatch', { 'for': 'clojure' }
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
 
 call plug#end()
 
@@ -70,8 +85,12 @@ set undoreload=10000        " number of lines to save for undo
 " =====================================
 " others
 " =====================================
-colorscheme solarized
+let base16colorspace=256
+colorscheme base16-eighties
 :hi link htmlLink NONE "disable link underline
+let g:loaded_python_provider = 1
+let g:python3_host_prog = '/usr/local/bin/python3'
+
 
 " =====================================
 " autocommands
@@ -91,6 +110,10 @@ augroup LineNumbers
   au WinLeave * setlocal norelativenumber
 augroup END
 
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
 
 so ~/.config/nvim/settings/mappings.vim
 so ~/.config/nvim/settings/plugins.vim

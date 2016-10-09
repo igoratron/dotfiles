@@ -35,6 +35,8 @@ nmap <leader>v :tabedit $MYVIMRC<CR>
 "fold
 nmap <leader>zc :setlocal fdm=indent<CR>
 
+nmap <leader>m :make
+
 " ====================
 " plugins
 " ====================
@@ -57,3 +59,16 @@ nmap <silent> <leader>tf :TestFile<CR>
 nmap <silent> <leader>ta :TestSuite<CR>
 nmap <silent> <leader>tt :TestLast<CR>
 nmap <silent> <leader>tz let test#ruby#rspec#executable = 'zeus rspec'<CR>
+
+"qfenter
+let g:qfenter_open_map = ['o']
+let g:qfenter_vopen_map = ['<c-v>']
+let g:qfenter_hopen_map = ['<c-s>']
+let g:qfenter_topen_map = ['<c-t>']
+
+"gundo
+nmap U :GundoToggle<CR>
+
+"Tern
+autocmd FileType javascript nmap gd :TernDef<CR>
+autocmd FileType javascript nmap gr :TernRefs<CR>

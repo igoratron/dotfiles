@@ -1,33 +1,37 @@
-snippet func
-const $1 = function($2) {
-  $0
-};
-endsnippet
-
 snippet be
-beforeEach(function() {
+beforeEach(() => {
   $0
 });
 endsnippet
 
 snippet desc
-describe('$1', function() {
+describe('$1', () => {
   $0
 });
 endsnippet
 
 snippet it
-it('$1', function() {
+it('$1', () => {
   expect($2).toBe($3);
 });
 endsnippet
 
-snippet fn "insert function definition" i
-function${1}($2) {
-  $0
-}
-endsnippet
-
 snippet clog
 console.log($0);
+endsnippet
+
+snippet \
+$1 => $0
+endsnippet
+
+snippet const
+const $1 = $0;
+endsnippet
+
+snippet let
+let $1 = $0;
+endsnippet
+
+snippet var
+var $1 = $0;
 endsnippet

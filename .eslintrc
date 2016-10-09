@@ -1,0 +1,11 @@
+{
+  "extends": "airbnb-base",
+  "env": {
+    "jasmine": true
+  },
+  "rules": {
+    "no-use-before-define": ["error", { "functions": false }],
+    "no-underscore-dangle": ["error", { "allow": ["__Rewire__"] }],
+    "no-param-reassign": ["error", { "props": false }]
+  }
+}

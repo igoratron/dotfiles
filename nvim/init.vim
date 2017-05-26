@@ -2,11 +2,9 @@ call plug#begin('~/.config/nvim/plugins')
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'scrooloose/nerdtree'
 Plug 'mhinz/vim-grepper'
-Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'mattn/emmet-vim'
-Plug 'bling/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -20,22 +18,34 @@ Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-commentary'
 Plug 'wellle/targets.vim'
 Plug 'chriskempson/base16-vim'
-Plug 'othree/jspc.vim', { 'for': 'javascript'}
-Plug 'carlitux/deoplete-ternjs', { 'for': 'javascript'}
-Plug 'ternjs/tern_for_vim', { 'for': 'javascript'}
+" Plug 'carlitux/deoplete-ternjs', { 'for': 'javascript'}
+Plug 'fishbullet/deoplete-ruby', { 'for': 'ruby'}
+" Plug 'ternjs/tern_for_vim', { 'for': 'javascript'}
 Plug 'yssl/QFEnter'
 Plug 'sjl/gundo.vim'
-Plug 'junegunn/vim-peekaboo'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'kassio/neoterm'
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-classpath', { 'for': 'clojure' }
 Plug 'tpope/vim-leiningen', { 'for': 'clojure' }
 Plug 'tpope/vim-projectionist', { 'for': 'clojure' }
-Plug 'tpope/vim-dispatch', { 'for': 'clojure' }
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
+Plug 'junegunn/goyo.vim'
+Plug 'machakann/vim-highlightedyank'
+Plug 'ryanoasis/vim-devicons'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+" Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+
+Plug 'sourcegraph/javascript-typescript-langserver', { 'do': 'npm install && npm run build'}
+Plug 'tpope/vim-unimpaired'
 
 call plug#end()
+
+set rtp+=/Users/iczerwinski/.config/nvim/plugins/vim-mechanodoro
+
 
 " =====================================
 " moving around, searching and patterns
@@ -85,11 +95,25 @@ set undoreload=10000        " number of lines to save for undo
 " =====================================
 " others
 " =====================================
-let base16colorspace=256
+" let base16colorspace=256
 colorscheme base16-eighties
-:hi link htmlLink NONE "disable link underline
+
+hi link htmlLink NONE "disable link underline
+hi VertSplit ctermbg=NONE guibg=NONE
+hi Normal ctermbg=NONE
+
 let g:loaded_python_provider = 1
 let g:python3_host_prog = '/usr/local/bin/python3'
+
+"opens splits in the 'right' way
+set splitbelow
+set splitright
+
+"show wrapped lines
+set showbreak=↪\ 
+
+"ignore folders I don't care about
+set wildignore+=node_modules,dist
 
 
 " =====================================
@@ -110,10 +134,21 @@ augroup LineNumbers
   au WinLeave * setlocal norelativenumber
 augroup END
 
-if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
-  source ~/.vimrc_background
-endif
-
 so ~/.config/nvim/settings/mappings.vim
 so ~/.config/nvim/settings/plugins.vim
+
+set statusline=%#StatusLine#
+set statusline+=\ %{toupper(mode())}\ 
+set statusline+=%#StatusLineNC#
+set statusline+=\ \ %{fugitive#head()}\ 
+set statusline+=%1*
+set statusline+=\ %.20F
+set statusline+=%=
+" set statusline+=%#DiffDelete#
+" set statusline+=\ \ No\ pomodoros\ 
+set statusline+=%{gutentags#statusline('[Generating\ tags...]')}
+
+set statusline+=%1*
+set statusline+=\ %{&filetype}\ 
+set statusline+=%#StatusLineNC#
+set statusline+=\ %l/%L\ %P\ 

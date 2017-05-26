@@ -1,12 +1,12 @@
 {
   "plugins": {
-    "browser": {},
     "node": {},
-    "es_modules": {},
-    "jasmine": {}
+    "es_modules": {}
   },
   "libs": [
-    "ecmascript"
+    "ecmascript",
+    "jquery",
+    "browser"
   ],
   "ecmaVersion": 6
 }

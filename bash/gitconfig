@@ -1,19 +1,30 @@
 [alias]
-	co = checkout
-	br = branch
-	ci = commit
-	st = status
+  co = checkout
+  br = branch
+  ci = commit
+  st = status
+  lease-push = push --force-with-lease
+  rbi = rebase -i origin/master
+  rb = rebase origin/master
+  fp = fetch -p
+  d = diff
+  dc = diff --cached
 [user]
-	name = Igor Czerwinski
-	email = igor.czerwinski@fundingcircle.com
+  name = Igor Czerwinski
+  email = igor.czerwinski@fundingcircle.com
 [core]
-	excludesfile = /Users/iczerwinski/.gitignore
-	editor = nvim
+  excludesfile = /Users/iczerwinski/.gitignore
+  editor = nvim
 [difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+  path = 
 [mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+  cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+  trustExitCode = true
 [push]
-	default = simple
+  default = simple
+[filter "lfs"]
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+  clean = git-lfs clean -- %f

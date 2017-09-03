@@ -1,50 +1,39 @@
 call plug#begin('~/.config/nvim/plugins')
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'scrooloose/nerdtree'
-Plug 'mhinz/vim-grepper'
-" Plug 'ctrlpvim/ctrlp.vim'
-Plug 'Yggdroot/indentLine'
-Plug 'mattn/emmet-vim'
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-fugitive'
-Plug 'sheerun/vim-polyglot'
-Plug 'Raimondi/delimitMate'
-Plug 'janko-m/vim-test'
-Plug 'benekastah/neomake'
-Plug 'kshenoy/vim-signature'
-Plug 'SirVer/ultisnips'
-Plug 'tpope/vim-commentary'
-Plug 'wellle/targets.vim'
-Plug 'chriskempson/base16-vim'
 " Plug 'carlitux/deoplete-ternjs', { 'for': 'javascript'}
-Plug 'fishbullet/deoplete-ruby', { 'for': 'ruby'}
 " Plug 'ternjs/tern_for_vim', { 'for': 'javascript'}
-Plug 'yssl/QFEnter'
-Plug 'sjl/gundo.vim'
-Plug 'hail2u/vim-css3-syntax'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'kassio/neoterm'
 Plug '/usr/local/opt/fzf'
+Plug 'Raimondi/delimitMate'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'SirVer/ultisnips'
+Plug 'Yggdroot/indentLine'
+Plug 'airblade/vim-gitgutter'
+Plug 'benekastah/neomake'
+Plug 'chriskempson/base16-vim'
+Plug 'fishbullet/deoplete-ruby', { 'for': 'ruby'}
+Plug 'hail2u/vim-css3-syntax'
 Plug 'junegunn/fzf.vim'
-Plug 'tpope/vim-classpath', { 'for': 'clojure' }
-Plug 'tpope/vim-leiningen', { 'for': 'clojure' }
-Plug 'tpope/vim-projectionist', { 'for': 'clojure' }
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
 Plug 'junegunn/goyo.vim'
+Plug 'kassio/neoterm'
+Plug 'kshenoy/vim-signature'
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'machakann/vim-highlightedyank'
-Plug 'ryanoasis/vim-devicons'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-" Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
-
-Plug 'sourcegraph/javascript-typescript-langserver', { 'do': 'npm install && npm run build'}
+Plug 'mattn/emmet-vim'
+Plug 'mhinz/vim-grepper'
+Plug 'rhysd/clever-f.vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-vinegar'
+Plug 'vim-scripts/summerfruit256.vim'
+Plug 'wellle/targets.vim'
+Plug 'yssl/QFEnter'
 
 call plug#end()
 
-set rtp+=/Users/iczerwinski/.config/nvim/plugins/vim-mechanodoro
+" set rtp+=/Users/iczerwinski/.config/nvim/plugins/vim-mechanodoro
 
 
 " =====================================
@@ -91,11 +80,14 @@ set undodir=$HOME/.vim/undo " where to save undo histories
 set undofile                " Save undo's after file closes
 set undolevels=1000         " How many undos
 set undoreload=10000        " number of lines to save for undo
+"
+" substitue preview
+:set inccommand=split
 
 " =====================================
 " others
 " =====================================
-" let base16colorspace=256
+let base16colorspace=256
 colorscheme base16-eighties
 
 hi link htmlLink NONE "disable link underline
@@ -115,24 +107,22 @@ set showbreak=↪\
 "ignore folders I don't care about
 set wildignore+=node_modules,dist
 
-
 " =====================================
 " autocommands
 " =====================================
 autocmd FileType gitcommit setlocal spell
 autocmd! BufWritePost,BufReadPost * Neomake
-autocmd bufwritepost .vimrc source $MYVIMRC
-augroup CursorLine
-  au!
-  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-  au WinLeave * setlocal nocursorline
-augroup END
+autocmd BufWritePost .vimrc source $MYVIMRC
 
 augroup LineNumbers
   au!
   au VimEnter,WinEnter,BufWinEnter * setlocal relativenumber
   au WinLeave * setlocal norelativenumber
 augroup END
+aug fzf_setup
+  au!
+  au TermOpen term://*FZF tnoremap <silent> <buffer><nowait> <esc> <c-c>
+aug END
 
 so ~/.config/nvim/settings/mappings.vim
 so ~/.config/nvim/settings/plugins.vim
@@ -142,11 +132,8 @@ set statusline+=\ %{toupper(mode())}\
 set statusline+=%#StatusLineNC#
 set statusline+=\ \ %{fugitive#head()}\ 
 set statusline+=%1*
-set statusline+=\ %.20F
+set statusline+=\ %F
 set statusline+=%=
-" set statusline+=%#DiffDelete#
-" set statusline+=\ \ No\ pomodoros\ 
-set statusline+=%{gutentags#statusline('[Generating\ tags...]')}
 
 set statusline+=%1*
 set statusline+=\ %{&filetype}\ 

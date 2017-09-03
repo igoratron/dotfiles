@@ -3,6 +3,9 @@
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
+BASE16_SHELL=$HOME/.config/base16-shell/
+[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+
 export TERM=xterm-256color
 
 export NVM_DIR="$HOME/.nvm"
@@ -35,7 +38,21 @@ function bump-version() {
   npm --no-git-tag-version version $1 && git ci -m "Bump version" -- package.json
 }
 
+function create-branch() {
+  USER='igor.czerwinski@fundingcircle.com'
+  PASSWORD=''
+  ISSUE=$1
+  BRANCH=$(curl -s -q -u $USER:$PASSWORD https://jira.fundingcircle.com/rest/api/latest/issue/$ISSUE | jq -r '.key + "-" + .fields.summary' | sed 's/ /-/g' | tr '[:upper:]' '[:lower:]')
+  git fp
+  git co -b $BRANCH
+}
+
+function publish-image() {
+  docker build -t quay.io/fundingcircle/$(basename $PWD):$1 . && docker push quay.io/fundingcircle/$(basename $PWD):$1
+}
+
 export FZF_DEFAULT_COMMAND='ag -g ""'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 export PS1="\w \e[90m\`parse_git_branch\` \`show_jobs\`\`show_pomodoro\`\e[0m\n⚡  "
 export PROMPT_COMMAND='echo -ne "\033]0;${PWD##*/}\007"'
@@ -55,6 +72,5 @@ alias composer='docker run --rm -v $(pwd):/app -w /app composer/composer'
 alias php='docker run --rm -it -v $(pwd):/app -p 8000:8000 -w /app php php'
 alias login-moby="screen ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/tty"
 alias remove-merged-branches="git branch --merged | egrep -v '(^\*|master|dev)' | xargs git branch -d"
-
-export POCKET_KEY=46462-3c0e5926fd11ca22c6eac040
-export READABILITY_KEY=a8bdf1825ad4dd57c24a90cd57591335e4bbffdc
+alias fgco='git br -a | sed "s/remotes\/origin\///"| uniq | fzf | xargs git co'
+alias fgulp='ag "(?<=gulp.task\(.)[a-z0-9:-]+" --nofilename --nonumber -o --nocolor | grep . | fzf | xargs $(npm bin)/gulp'

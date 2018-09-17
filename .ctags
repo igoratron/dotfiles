@@ -6,6 +6,9 @@
 --exclude=node_modules
 --exclude=bower_components
 --exclude=vendor
+--exclude=*.svg
+--exclude=*.json
+--exclude=*.spec.js
 
 #CSS defs
 --langmap=css:.css

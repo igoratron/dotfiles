@@ -1,12 +1,11 @@
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+source ~/.config/bash/secrets
+
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
-BASE16_SHELL=$HOME/.config/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-
-export TERM=xterm-256color
+export TERM=screen-256color
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
@@ -14,6 +13,8 @@ export NVM_DIR="$HOME/.nvm"
 if [ -f ~/.config/bash/git-completion.bash  ]; then
   . ~/.config/bash/git-completion.bash
 fi
+
+export PROJECTS_ROOT=~/Development/fc
 
 #current branch in git repo
 function parse_git_branch() {
@@ -39,16 +40,14 @@ function bump-version() {
 }
 
 function create-branch() {
-  USER='igor.czerwinski@fundingcircle.com'
-  PASSWORD=''
   ISSUE=$1
-  BRANCH=$(curl -s -q -u $USER:$PASSWORD https://jira.fundingcircle.com/rest/api/latest/issue/$ISSUE | jq -r '.key + "-" + .fields.summary' | sed 's/ /-/g' | tr '[:upper:]' '[:lower:]')
+  BRANCH=$(curl -s -q -u $JIRA_USER:$JIRA_TOKEN https://jira.fundingcircle.com/rest/api/latest/issue/$ISSUE | jq -r '.key + "-" + .fields.summary' | sed 's/ /-/g' | tr '[:upper:]' '[:lower:]')
   git fp
   git co -b $BRANCH
 }
 
 function publish-image() {
-  docker build -t quay.io/fundingcircle/$(basename $PWD):$1 . && docker push quay.io/fundingcircle/$(basename $PWD):$1
+  docker build -t quay.io/fundingcircle/$(basename $PWD):$1 --build-arg BUNDLE_FUNDINGCIRCLE__JFROG__IO --build-arg BUNDLE_GEM__FURY__IO . && docker push quay.io/fundingcircle/$(basename $PWD):$1
 }
 
 export FZF_DEFAULT_COMMAND='ag -g ""'
@@ -64,7 +63,7 @@ alias gitgraph="git log --graph --all --decorate --oneline"
 alias vim="nvim"
 alias compose="docker-compose"
 alias ne='PATH=$(npm bin):$PATH'
-alias fcd='~/Development/fc/docker-uk-apps/bin/fcd'
+alias fcd='git pull && bin/fcd'
 
 alias ghci='docker run -it --rm -v $(pwd):/app -w /app haskell ghci'
 alias ghc='docker run -it --rm -v $(pwd):/app -w /app haskell ghc'

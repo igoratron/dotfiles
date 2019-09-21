@@ -47,7 +47,8 @@ function create-branch() {
 }
 
 function publish-image() {
-  docker build -t quay.io/fundingcircle/$(basename $PWD):$1 --build-arg BUNDLE_FUNDINGCIRCLE__JFROG__IO --build-arg BUNDLE_GEM__FURY__IO . && docker push quay.io/fundingcircle/$(basename $PWD):$1
+  docker build -t quay.io/fundingcircle/$(basename $PWD):$1 --build-arg BUNDLE_FUNDINGCIRCLE__JFROG__IO --build-arg BUNDLE_GEM__FURY__IO --build-arg ARTIFACTORY_USER --build-arg ARTIFACTORY_TOKEN . 
+  docker push quay.io/fundingcircle/$(basename $PWD):$1
 }
 
 export FZF_DEFAULT_COMMAND='ag -g ""'
@@ -63,7 +64,6 @@ alias gitgraph="git log --graph --all --decorate --oneline"
 alias vim="nvim"
 alias compose="docker-compose"
 alias ne='PATH=$(npm bin):$PATH'
-alias fcd='git pull && bin/fcd'
 
 alias ghci='docker run -it --rm -v $(pwd):/app -w /app haskell ghci'
 alias ghc='docker run -it --rm -v $(pwd):/app -w /app haskell ghc'
@@ -73,3 +73,10 @@ alias login-moby="screen ~/Library/Containers/com.docker.docker/Data/com.docker.
 alias remove-merged-branches="git branch --merged | egrep -v '(^\*|master|dev)' | xargs git branch -d"
 alias fgco='git br -a | sed "s/remotes\/origin\///"| uniq | fzf | xargs git co'
 alias fgulp='ag "(?<=gulp.task\(.)[a-z0-9:-]+" --nofilename --nonumber -o --nocolor | grep . | fzf | xargs $(npm bin)/gulp'
+alias work='sh ~/work'
+alias restart-service='fcd ps | grep Exit | fzf -m --cycle | awk "{print $1}" | xargs docker start'
+alias npm-run="cat package.json | jq '.scripts' | tail -n +2 | tail -r | tail -n +2 | cut -d '\"' -f 2 | fzf | xargs npm run"
+alias git-show="git log --oneline | fzf --preview 'echo {} | cut -d \" \" -f 1 | xargs git show' | cut -d \" \" -f 1 | xargs git show"
+
+export PATH="$PATH:/Users/iczerwinski/.fcd/bin"
+export FCD_DIR="/Users/iczerwinski/Development/fc/docker-uk-apps"

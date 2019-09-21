@@ -3,3 +3,4 @@ tags
 .tern-port
 .DS_Store
 vendor/bundle
+jsconfig.json

@@ -9,15 +9,14 @@ nnoremap <expr> j v:count ? 'j' : 'gj'
 nnoremap <expr> k v:count ? 'k' : 'gk'
 
 "switch tabs
-nnoremap <C-l> :tabn<CR>
-nnoremap <C-h> :tabp<CR>
+nnoremap <Left> :tabp<CR>
+nnoremap <Right> :tabn<CR>
 
 "search for visually selected word
 vnoremap // y/<C-R>"<CR>
 
 "remap esc
 inoremap jk <Esc>
-vnoremap jk <Esc>
 
 "scroll up or down
 " nnoremap <C-k> <C-y>
@@ -53,6 +52,12 @@ vmap <leader>p "*p
 "copy file name
 nnoremap <leader>yfn :! echo % \| pbcopy<CR>
 
+"open netrw
+nnoremap <leader>e :Explore<CR>
+
+"paste in current directory
+cnoremap %% %:h
+
 " ====================
 " plugins
 " ====================
@@ -70,3 +75,17 @@ let g:qfenter_topen_map = ['<c-t>']
 "fzf
 nmap <leader>p :Files<CR>
 nmap <leader>t :Tags<CR>
+
+function HighlightLine()
+  execute 'match Search /\%'.line('.').'l/'
+  call timer_start(500, { tid -> execute('match')})
+endfunction
+
+nnoremap <leader><leader> :call HighlightLine()<CR>
+
+"LanguageServer
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>

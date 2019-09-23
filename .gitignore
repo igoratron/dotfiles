@@ -1,6 +1,2 @@
-tags
-.tern-project
-.tern-port
-.DS_Store
-vendor/bundle
-jsconfig.json
+nvim/
+tmux/plugins/

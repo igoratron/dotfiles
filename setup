@@ -1,7 +1,7 @@
 brew cask install alacritty karabiner-elements spectacle slack spotify
 
 # install the basics
-brew install tmux neovim python3 fzf nvm reattach-to-user-namespace ctags tree jq
+brew install tmux neovim python3 fzf nvm reattach-to-user-namespace ctags tree jq wget ag
 
 pip3 install neovim
 

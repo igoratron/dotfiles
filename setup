@@ -20,6 +20,7 @@ ln -s ~/.config/tmux/tmux.conf ~/.tmux.conf
 ln -s ~/.config/bash/bash_profile ~/.bash_profile
 ln -s ~/.config/git/gitconfig ~/.gitconfig
 ln -s ~/.config/git/gitignore ~/.gitignore
+ln -s ~/.config/.ctags ~/.ctags
 
 # KeyRepeat stuff
 defaults write -g InitialKeyRepeat -int 10 # normal minimum is 15 (225 ms)

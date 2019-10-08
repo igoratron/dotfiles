@@ -78,7 +78,7 @@ alias fgulp='ag "(?<=gulp.task\(.)[a-z0-9:-]+" --nofilename --nonumber -o --noco
 alias work='sh ~/work'
 alias restart-service='fcd ps | grep Exit | fzf -m --cycle | awk "{print $1}" | xargs docker start'
 alias npm-run="cat package.json | jq '.scripts' | tail -n +2 | tail -r | tail -n +2 | cut -d '\"' -f 2 | fzf | xargs npm run"
-alias git-show="git log --oneline | fzf --preview 'echo {} | cut -d \" \" -f 1 | xargs git show' | cut -d \" \" -f 1 | xargs git show"
+alias git-show="git log --oneline | fzf --preview 'echo {} | cut -d \" \" -f 1 | xargs git show | diff-so-fancy' | cut -d \" \" -f 1 | xargs git show"
 
 export PATH="$PATH:/Users/iczerwinski/.fcd/bin"
 export FCD_DIR="/Users/iczerwinski/Development/fc/docker-uk-apps"

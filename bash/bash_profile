@@ -56,7 +56,7 @@ function publish-image() {
 export FZF_DEFAULT_COMMAND='ag -g ""'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-export PS1="\w \e[90m\`parse_git_branch\` \`show_jobs\`\`show_pomodoro\`\e[0m\n⚡  "
+export PS1="\[\w \`tput setaf 240; parse_git_branch\` \`show_jobs; tput setaf 42\`≫ \`tput sgr0\`\]"
 export PROMPT_COMMAND='echo -ne "\033]0;${PWD##*/}\007"'
 export VISUAL=nvim
 export EDITOR="$VISUAL"

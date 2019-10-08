@@ -85,8 +85,13 @@ set undoreload=10000        " number of lines to save for undo
 " =====================================
 " others
 " =====================================
-let base16colorspace=256
-colorscheme zellner
+set t_Co=256
+colorscheme onehalfdark
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
 
 " hi link htmlLink NONE "disable link underline
 " hi VertSplit ctermbg=NONE guibg=NONE cterm=NONE ctermfg=124

@@ -145,8 +145,14 @@ nnoremap <expr> j v:count ? 'j' : 'gj'
 nnoremap <expr> k v:count ? 'k' : 'gk'
 
 "switch tabs
-nnoremap <C-h> :tabp<CR>
-nnoremap <C-l> :tabn<CR>
+nnoremap <C-p> :tabp<CR>
+nnoremap <C-n> :tabn<CR>
+
+"switch panes
+nnoremap <c-h> <c-w>h
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
 
 "search for visually selected word
 vnoremap // y/<C-R>"<CR>

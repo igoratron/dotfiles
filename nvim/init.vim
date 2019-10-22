@@ -1,38 +1,29 @@
 call plug#begin('~/.config/nvim/plugins')
- Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
  Plug '/usr/local/opt/fzf'
  Plug 'Raimondi/delimitMate'
- Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
  Plug 'SirVer/ultisnips'
  Plug 'Yggdroot/indentLine'
- Plug 'airblade/vim-gitgutter'
  Plug 'benekastah/neomake'
  Plug 'hail2u/vim-css3-syntax', { 'for': 'css'}
  Plug 'junegunn/fzf.vim'
  Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
- Plug 'kassio/neoterm'
  Plug 'kshenoy/vim-signature'
  Plug 'ludovicchabant/vim-gutentags'
  Plug 'machakann/vim-highlightedyank'
  Plug 'mattn/emmet-vim'
+ Plug 'sonph/onehalf', {'rtp': 'vim/'}
  Plug 'mhinz/vim-grepper'
+ Plug 'neoclide/coc.nvim', {'branch': 'release'}
  Plug 'rhysd/clever-f.vim'
  Plug 'sheerun/vim-polyglot'
  Plug 'tpope/vim-commentary'
  Plug 'tpope/vim-fugitive'
- Plug 'tpope/vim-rails', { 'for': ['ruby', 'eruby'] }
  Plug 'tpope/vim-repeat'
  Plug 'tpope/vim-surround'
  Plug 'tpope/vim-unimpaired'
  Plug 'tpope/vim-vinegar'
  Plug 'wellle/targets.vim'
- " Plug 'yssl/QFEnter'
- 
 call plug#end()
-
 
 " =====================================
 " moving around, searching and patterns
@@ -80,30 +71,16 @@ set undolevels=1000         " How many undos
 set undoreload=10000        " number of lines to save for undo
 "
 " substitue preview
-:set inccommand=split
+set inccommand=split
 
 " =====================================
 " others
 " =====================================
 set t_Co=256
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+set termguicolors
 colorscheme onehalfdark
-if exists('+termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
-endif
-
-" hi link htmlLink NONE "disable link underline
-" hi VertSplit ctermbg=NONE guibg=NONE cterm=NONE ctermfg=124
-" hi Normal ctermbg=NONE
-" hi StatusLine ctermbg=124 ctermfg=white
-" hi StatusLineNC ctermbg=black ctermfg=white
-" hi TabLineSel ctermbg=124 ctermfg=white
-" hi TabLine ctermbg=black ctermfg=white cterm=NONE
-" hi TabLineFill ctermbg=black cterm=NONE
-" hi Folded ctermbg=black
-" hi Search cterm=none ctermbg=white ctermfg=black
-
 
 "disable unused plugin providers
 let g:loaded_node_provider = 1
@@ -152,16 +129,16 @@ hi TabLineFill cterm=NONE
 hi Folded ctermbg=232
 hi Visual ctermbg=8
 
-
 set statusline=%#StatusLine#
 set statusline+=\ %{toupper(mode())}\ 
 set statusline+=%#StatusLineNC#
-set statusline+=\ \ %{fugitive#head()}\ 
+set statusline+=\ %.30{fugitive#head()}\ 
 set statusline+=%1*
-set statusline+=\ %F
+set statusline+=\ %.50F
 set statusline+=%=
 
 set statusline+=%1*
+set statusline+=\ %{coc#status()}\ 
 set statusline+=\ %{&filetype}\ 
 set statusline+=%#StatusLineNC#
 set statusline+=\ %l/%L\ %P\ 

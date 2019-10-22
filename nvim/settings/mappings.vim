@@ -9,18 +9,14 @@ nnoremap <expr> j v:count ? 'j' : 'gj'
 nnoremap <expr> k v:count ? 'k' : 'gk'
 
 "switch tabs
-nnoremap <Left> :tabp<CR>
-nnoremap <Right> :tabn<CR>
+nnoremap <C-h> :tabp<CR>
+nnoremap <C-l> :tabn<CR>
 
 "search for visually selected word
 vnoremap // y/<C-R>"<CR>
 
 "remap esc
 inoremap jk <Esc>
-
-"scroll up or down
-" nnoremap <C-k> <C-y>
-
 
 " ====================
 " leader mappings
@@ -66,12 +62,6 @@ cnoremap %% %:h
 nnoremap <leader>f  :Grepper -tool ag  -grepprg ag --vimgrep<cr>
 nnoremap <leader>*  :Grepper -tool ag -cword -noprompt<cr>
 
-"qfenter
-let g:qfenter_open_map = ['o']
-let g:qfenter_vopen_map = ['<c-v>']
-let g:qfenter_hopen_map = ['<c-s>']
-let g:qfenter_topen_map = ['<c-t>']
-
 "fzf
 nmap <leader>p :Files<CR>
 nmap <leader>t :Tags<CR>
@@ -83,9 +73,11 @@ endfunction
 
 nnoremap <leader><leader> :call HighlightLine()<CR>
 
-"LanguageServer
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+"vimdiff
+nnoremap dor :diffget //3<CR>
+nnoremap dol :diffget //2<CR>
+vnoremap dor :diffget //3<CR>
+vnoremap dol :diffget //2<CR>
+vnoremap dp :diffput 1<CR>
+
+nmap <silent> gd <Plug>(coc-definition)

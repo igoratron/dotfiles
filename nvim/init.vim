@@ -1,3 +1,6 @@
+" # vim: fdm=marker
+
+" {{{ Plugin list
 call plug#begin('~/.config/nvim/plugins')
  Plug '/usr/local/opt/fzf'
  Plug 'Raimondi/delimitMate'
@@ -24,44 +27,22 @@ call plug#begin('~/.config/nvim/plugins')
  Plug 'tpope/vim-vinegar'
  Plug 'wellle/targets.vim'
 call plug#end()
+" }}}
 
-" =====================================
-" moving around, searching and patterns
-" =====================================
+" {{{ Vim configuration
 set ignorecase
 set smartcase
-"
-" =====================================
-" displaying text
-" =====================================
 set breakindent
 set linebreak
 set list
 set listchars=trail:˽,extends:⋯,precedes:⋯,tab:>-
 set number
-
-" =====================================
-" syntax, highlighting and spelling
-" =====================================
-set background=dark
 syntax on
-
-" =====================================
-" tabs and indenting
-" =====================================
 set expandtab
 set shiftwidth=2
 set smartindent
 set tabstop=2
-
-" =====================================
-" the swap file
-" =====================================
-:set noswapfile
-
-" =====================================
-" command line editing
-" =====================================
+set noswapfile
 if !isdirectory($HOME . "/.config/nvim/undo")
     call mkdir($HOME . "/.config/nvim/undo", "p")
 endif
@@ -69,19 +50,16 @@ set undodir=$HOME/.vim/undo " where to save undo histories
 set undofile                " Save undo's after file closes
 set undolevels=1000         " How many undos
 set undoreload=10000        " number of lines to save for undo
-"
-" substitue preview
 set inccommand=split
-
-" =====================================
-" others
-" =====================================
 set t_Co=256
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set termguicolors
-colorscheme onehalfdark
-
+set splitbelow
+set splitright
+set showbreak=↪\ 
+set wildignore+=node_modules,dist
+"
 "disable unused plugin providers
 let g:loaded_node_provider = 1
 let g:loaded_ruby_provider = 1
@@ -89,20 +67,14 @@ let g:loaded_python_provider = 1
 
 let g:python3_host_skip_check=1
 let g:python3_host_prog = '/usr/local/bin/python3'
+" }}}
 
-"opens splits in the 'right' way
-set splitbelow
-set splitright
+" {{{ Theme
+colorscheme onehalfdark
+set background=dark
+" }}}
 
-"show wrapped lines
-set showbreak=↪\ 
-
-"ignore folders I don't care about
-set wildignore+=node_modules,dist
-
-" =====================================
-" autocommands
-" =====================================
+" {{{ Autocommands
 autocmd FileType gitcommit setlocal spell
 autocmd! BufWritePost,BufReadPost * Neomake
 autocmd BufWritePost .vimrc source $MYVIMRC
@@ -120,15 +92,9 @@ augroup ultisnips_no_auto_expansion
   au!
   au VimEnter * au! UltiSnips_AutoTrigger
 augroup END
+" }}}
 
-so ~/.config/nvim/settings/mappings.vim
-so ~/.config/nvim/settings/plugins.vim
-
-hi VertSplit ctermbg=0 ctermfg=245 cterm=none
-hi TabLineFill cterm=NONE
-hi Folded ctermbg=232
-hi Visual ctermbg=8
-
+" {{{ Status line configuration
 set statusline=%#StatusLine#
 set statusline+=\ %{toupper(mode())}\ 
 set statusline+=%#StatusLineNC#
@@ -142,3 +108,113 @@ set statusline+=\ %{coc#status()}\
 set statusline+=\ %{&filetype}\ 
 set statusline+=%#StatusLineNC#
 set statusline+=\ %l/%L\ %P\ 
+" }}}
+
+" {{{ Plugin configuration
+"indentLine
+let g:indentLine_char = '⋮'
+
+"neomake
+if !empty(glob(".eslint*")) 
+  let g:neomake_javascript_enabled_makers = ['eslint']
+  let g:neomake_javascript_eslint_exe="eslint"
+endif
+
+if !empty(glob(".stylelint*")) 
+  let g:neomake_scss_enabled_makers = ['stylelint']
+  let g:neomake_scss_stylelint_exe="stylelint"
+endif
+
+"ultisnips
+let g:UltiSnipsExpandTrigger="<Tab>"
+let g:UltiSnipsJumpForwardTrigger="<Tab>"
+
+"fzf
+let g:fzf_history_dir = '~/.config/fzf-history'
+" }}}
+
+" {{{ Key mappings
+let mapleader = "\<space>"
+
+" ====================
+" general
+" ====================
+"
+"navigate wrapped lines
+nnoremap <expr> j v:count ? 'j' : 'gj'
+nnoremap <expr> k v:count ? 'k' : 'gk'
+
+"switch tabs
+nnoremap <C-h> :tabp<CR>
+nnoremap <C-l> :tabn<CR>
+
+"search for visually selected word
+vnoremap // y/<C-R>"<CR>
+
+"remap esc
+inoremap jk <Esc>
+
+" ====================
+" leader mappings
+" ====================
+
+"disable search highlight
+nnoremap <leader>jk :<C-u>nohlsearch<CR>
+
+"exit insert mode in terminal
+tnoremap <leader>jk <C-\><C-n>
+"
+"open vimrc in new tab
+nmap <leader>v :tabedit $MYVIMRC<CR>
+
+"fold
+nmap <leader>zc :setlocal fdm=indent<CR>
+
+"save
+nmap <leader>w :w<CR>
+nmap <leader>x :x<CR>
+
+"quit
+nmap <leader>qa :qa<CR>
+
+"copy paste from clipboard
+vmap <leader>y "*y
+vmap <leader>p "*p
+
+"copy file name
+nnoremap <leader>yfn :! echo % \| pbcopy<CR>
+
+"open netrw
+nnoremap <leader>e :Explore<CR>
+
+"paste in current directory
+cnoremap %% %:h
+
+" ====================
+" plugins
+" ====================
+
+"vimgrep
+nnoremap <leader>f  :Grepper -tool ag  -grepprg ag --vimgrep<cr>
+nnoremap <leader>*  :Grepper -tool ag -cword -noprompt<cr>
+
+"fzf
+nmap <leader>p :Files<CR>
+nmap <leader>t :Tags<CR>
+
+function HighlightLine()
+  execute 'match Search /\%'.line('.').'l/'
+  call timer_start(500, { tid -> execute('match')})
+endfunction
+
+nnoremap <leader><leader> :call HighlightLine()<CR>
+
+"vimdiff
+nnoremap dor :diffget //3<CR>
+nnoremap dol :diffget //2<CR>
+vnoremap dor :diffget //3<CR>
+vnoremap dol :diffget //2<CR>
+vnoremap dp :diffput 1<CR>
+
+nmap <silent> gd <Plug>(coc-definition)
+" }}}

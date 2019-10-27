@@ -26,4 +26,7 @@ ln -s ~/.config/.ctags ~/.ctags
 defaults write -g InitialKeyRepeat -int 10 # normal minimum is 15 (225 ms)
 defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
 
-# nvm install 12
+# install node
+local nvm_dir="$HOME/.nvm"
+[ -s "$nvm_dir/nvm.sh" ] && source "$nvm_dir/nvm.sh"  # This loads nvm
+nvm install 12

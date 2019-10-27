@@ -1,7 +1,14 @@
-brew bundle
+#!/bin/bash
+set -euxo pipefail
 
+# install Brew
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+# install dependencies
+brew bundle
 pip3 install neovim
 
+# install tmux plugin
 git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 
 # fzf

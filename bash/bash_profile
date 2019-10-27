@@ -24,7 +24,7 @@ function bump-version() {
 
 function create-branch() {
   ISSUE=$1
-  BRANCH=$(curl -s -q -u $JIRA_USER:$JIRA_TOKEN https://jira.fundingcircle.com/rest/api/latest/issue/$ISSUE | jq -r '.key + "-" + .fields.summary' | sed 's/ /-/g' | tr '[:upper:]' '[:lower:]')
+  BRANCH=$(curl -s -q -u $JIRA_USER:$JIRA_TOKEN https://jira.fundingcircle.com/rest/api/latest/issue/$ISSUE | jq -r '.key + "-" + .fields.summary' | sed -E 's/[ :-]+/-/g' | tr '[:upper:]' '[:lower:]')
   git fp
   git co -b $BRANCH
 }

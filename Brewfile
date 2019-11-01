@@ -14,6 +14,7 @@ brew "wget"
 
 cask "alacritty"
 cask "docker"
+cask "firefox"
 cask "karabiner-elements"
 cask "slack"
 cask "spectacle"

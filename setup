@@ -1,6 +1,9 @@
 #!/bin/bash
 set -euxo pipefail
 
+# clone this repo
+git clone https://github.com/igoratron/dotfiles.git ~/.config
+
 # install Brew
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 

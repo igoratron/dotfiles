@@ -7,6 +7,7 @@ call plug#begin('~/.config/nvim/plugins')
  Plug 'SirVer/ultisnips'
  Plug 'Yggdroot/indentLine'
  Plug 'benekastah/neomake'
+ Plug 'benmills/vimux'
  Plug 'hail2u/vim-css3-syntax', { 'for': 'css'}
  Plug 'junegunn/fzf.vim'
  Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
@@ -14,11 +15,11 @@ call plug#begin('~/.config/nvim/plugins')
  Plug 'ludovicchabant/vim-gutentags'
  Plug 'machakann/vim-highlightedyank'
  Plug 'mattn/emmet-vim'
- Plug 'sonph/onehalf', {'rtp': 'vim/'}
  Plug 'mhinz/vim-grepper'
  Plug 'neoclide/coc.nvim', {'branch': 'release'}
  Plug 'rhysd/clever-f.vim'
  Plug 'sheerun/vim-polyglot'
+ Plug 'sonph/onehalf', {'rtp': 'vim/'}
  Plug 'tpope/vim-commentary'
  Plug 'tpope/vim-fugitive'
  Plug 'tpope/vim-repeat'
@@ -223,4 +224,8 @@ vnoremap dol :diffget //2<CR>
 vnoremap dp :diffput 1<CR>
 
 nmap <silent> gd <Plug>(coc-definition)
+
+"vimux
+autocmd FileType ruby nnoremap <buffer> <leader>r :VimuxRunCommand('bundle exec rspec ' . expand('%'))<CR>
+nnoremap <leader>l :VimuxRunLastCommand<CR>
 " }}}

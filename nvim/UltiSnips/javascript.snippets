@@ -10,9 +10,21 @@ describe('$1', () => {
 });
 endsnippet
 
+snippet desca
+describe('$1', async () => {
+  $0
+});
+endsnippet
+
 snippet it
 it('$1', () => {
-  expect($2).toBe($3);
+  expect($2).toBe(false);
+});
+endsnippet
+
+snippet ita
+it('$1', async () => {
+  expect($2).toBe(false);
 });
 endsnippet
 
@@ -32,6 +44,18 @@ snippet let
 let $1 = $0;
 endsnippet
 
-snippet var
-var $1 = $0;
+snippet mio
+$1.mockImplementationOnce(() => {
+  $0;
+});
+endsnippet
+
+snippet mi
+$1.mockImplementation(() => {
+  $0;
+});
+endsnippet
+
+snippet req
+const { $0 } = require('$1');
 endsnippet

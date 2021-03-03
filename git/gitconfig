@@ -6,14 +6,15 @@
   lease-push = push --force-with-lease
   rbi = rebase -i
   rb = rebase
-  rbim = rebase -i origin/master
-  rbm = rebase origin/master
+  rbim = ! git fetch && git rebase -i origin/master
+  rbm = ! git fetch && git rebase origin/master
   fp = fetch -p
   d = diff
   dc = diff --cached
+  graph = log --graph --all --decorate --oneline
 [user]
   name = Igor Czerwinski
-  email = czerwony@gmail.com
+  email = 657586+igoratron@users.noreply.github.com
 [core]
   excludesfile = /Users/iczerwinski/.gitignore
   editor = nvim

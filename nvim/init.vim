@@ -2,14 +2,13 @@
 
 " {{{ Plugin list
 call plug#begin('~/.config/nvim/plugins')
- Plug '/usr/local/opt/fzf'
  Plug 'Raimondi/delimitMate'
  Plug 'SirVer/ultisnips'
  Plug 'Yggdroot/indentLine'
  Plug 'benekastah/neomake'
  Plug 'benmills/vimux'
  Plug 'hail2u/vim-css3-syntax', { 'for': 'css'}
- Plug 'junegunn/fzf.vim'
+ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
  Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
  Plug 'kshenoy/vim-signature'
  Plug 'ludovicchabant/vim-gutentags'
@@ -23,9 +22,11 @@ call plug#begin('~/.config/nvim/plugins')
  Plug 'tpope/vim-commentary'
  Plug 'tpope/vim-fugitive'
  Plug 'tpope/vim-repeat'
+ Plug 'tpope/vim-rhubarb'
  Plug 'tpope/vim-surround'
  Plug 'tpope/vim-unimpaired'
  Plug 'tpope/vim-vinegar'
+ Plug 'wellle/context.vim'
  Plug 'wellle/targets.vim'
 call plug#end()
 " }}}
@@ -93,6 +94,18 @@ augroup ultisnips_no_auto_expansion
   au!
   au VimEnter * au! UltiSnips_AutoTrigger
 augroup END
+
+aug Formatting
+  au!
+  autocmd FileType javascript setlocal formatprg=prettier\ --parser\ babel\ --stdin
+  autocmd filetype typescript setlocal formatprg=prettier\ --stdin
+aug END
+
+aug Golang
+  au!
+  autocmd FileType go setlocal listchars=trail:˽,extends:⋯,precedes:⋯,tab:\ \ 
+  autocmd FileType go setlocal formatprg=gofmt
+aug END
 " }}}
 
 " {{{ Status line configuration
@@ -105,7 +118,7 @@ set statusline+=\ %.50F
 set statusline+=%=
 
 set statusline+=%1*
-set statusline+=\ %{coc#status()}\ 
+" set statusline+=\ %{coc#status()}\ 
 set statusline+=\ %{&filetype}\ 
 set statusline+=%#StatusLineNC#
 set statusline+=\ %l/%L\ %P\ 
@@ -189,7 +202,7 @@ vmap <leader>y "*y
 vmap <leader>p "*p
 
 "copy file name
-nnoremap <leader>yfn :! echo % \| pbcopy<CR>
+nnoremap <silent> <leader>yfn :! echo % \| pbcopy<CR>
 
 "open netrw
 nnoremap <leader>e :Explore<CR>
@@ -206,8 +219,7 @@ nnoremap <leader>f  :Grepper -tool ag  -grepprg ag --vimgrep<cr>
 nnoremap <leader>*  :Grepper -tool ag -cword -noprompt<cr>
 
 "fzf
-nmap <leader>p :Files<CR>
-nmap <leader>t :Tags<CR>
+nmap <leader>p :FZF<CR>
 
 function HighlightLine()
   execute 'match Search /\%'.line('.').'l/'
@@ -217,15 +229,22 @@ endfunction
 nnoremap <leader><leader> :call HighlightLine()<CR>
 
 "vimdiff
-nnoremap dor :diffget //3<CR>
-nnoremap dol :diffget //2<CR>
-vnoremap dor :diffget //3<CR>
-vnoremap dol :diffget //2<CR>
-vnoremap dp :diffput 1<CR>
+nnoremap <leader>dor :diffget //3<CR>
+nnoremap <leader>dol :diffget //2<CR>
+vnoremap <leader>dor :diffget //3<CR>
+vnoremap <leader>dol :diffget //2<CR>
+vnoremap <leader>dp :diffput 1<CR>
 
+"coc
 nmap <silent> gd <Plug>(coc-definition)
 
 "vimux
+autocmd FileType javascript nnoremap <buffer> <leader>r :VimuxRunCommand('npx jest --testRegex ' . expand('%'))<CR>
 autocmd FileType ruby nnoremap <buffer> <leader>r :VimuxRunCommand('bundle exec rspec ' . expand('%'))<CR>
+nnoremap <leader>c :VimuxPromptCommand<CR>
 nnoremap <leader>l :VimuxRunLastCommand<CR>
+nnoremap <leader>i :VimuxInspectRunner<CR>
 " }}}
+
+let g:context_nvim_no_redraw = 1
+let g:fzf_layout = { 'down': '40%' }

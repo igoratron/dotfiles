@@ -30,7 +30,7 @@ function publish-image() {
   docker push quay.io/fundingcircle/$(basename $PWD):$1
 }
 
-export FZF_DEFAULT_COMMAND='ag -g ""'
+export FZF_DEFAULT_COMMAND='ag --ignore node_modules -g ""'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # prompt style
@@ -58,7 +58,6 @@ export VISUAL=nvim
 export EDITOR="$VISUAL"
 export GIT_EDITOR=nvim
 
-alias gitgraph="git log --graph --all --decorate --oneline"
 alias vim="nvim"
 alias compose="docker-compose"
 alias ne='PATH=$(npm bin):$PATH'

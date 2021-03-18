@@ -60,21 +60,8 @@ export GIT_EDITOR=nvim
 
 alias vim="nvim"
 alias compose="docker-compose"
-alias ne='PATH=$(npm bin):$PATH'
 
-alias ghci='docker run -it --rm -v $(pwd):/app -w /app haskell ghci'
-alias ghc='docker run -it --rm -v $(pwd):/app -w /app haskell ghc'
-alias composer='docker run --rm -v $(pwd):/app -w /app composer/composer'
-alias php='docker run --rm -it -v $(pwd):/app -p 8000:8000 -w /app php php'
-alias login-moby="screen ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/tty"
-alias remove-merged-branches="git branch --merged | egrep -v '(^\*|master|dev)' | xargs git branch -d"
-alias fgco='git br -a | sed "s/remotes\/origin\///"| uniq | fzf | xargs git co'
-alias fgulp='ag "(?<=gulp.task\(.)[a-z0-9:-]+" --nofilename --nonumber -o --nocolor | grep . | fzf | xargs $(npm bin)/gulp'
-alias work='sh ~/work'
-alias restart-service='fcd ps | grep Exit | fzf -m --cycle | awk "{print $1}" | xargs docker start'
 alias npm-run="cat package.json | jq '.scripts' | tail -n +2 | tail -r | tail -n +2 | cut -d '\"' -f 2 | fzf | xargs npm run"
 alias git-show="git log --oneline | fzf --preview 'echo {} | cut -d \" \" -f 1 | xargs git show | diff-so-fancy' | cut -d \" \" -f 1 | xargs git show"
 alias resolve-conflict='git st -s | grep '\''UU'\'' | tail -n 1 | awk '\''{print $2}'\'' | xargs -o nvim +Gvdiffsplit!'
-
-export PATH="$PATH:/Users/iczerwinski/.fcd/bin"
-export FCD_DIR="/Users/iczerwinski/Development/fc/docker-uk-apps"
+alias tree='tree -I node_modules'

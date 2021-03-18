@@ -140,8 +140,8 @@ if !empty(glob(".stylelint*"))
 endif
 
 "ultisnips
-let g:UltiSnipsExpandTrigger="<Tab>"
-let g:UltiSnipsJumpForwardTrigger="<Tab>"
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
 
 "fzf
 let g:fzf_history_dir = '~/.config/fzf-history'

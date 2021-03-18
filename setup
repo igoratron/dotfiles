@@ -10,7 +10,7 @@ set -euxo pipefail
 # install dependencies
 cd .config
 brew bundle
-pip3 install neovim
+pip3 install pynvim
 
 # install tmux plugin
 git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
@@ -24,10 +24,10 @@ curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
 vim +PlugInstall +qa
 
 # install node
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash
-export nvm_dir="$HOME/.nvm"
-[ -s "$nvm_dir/nvm.sh" ] && source "$nvm_dir/nvm.sh"  # This loads nvm
-nvm install 12
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+nvm install 15
 
 # aliases
 ln -s ~/.config/tmux/tmux.conf ~/.tmux.conf

@@ -40,8 +40,8 @@ ln -s ~/.config/.ctags ~/.ctags
 osascript -e 'tell application "System Preferences" to quit'
 
 # KeyRepeat stuff
-defaults write -g InitialKeyRepeat -int 12 # normal minimum is 15 (225 ms)
-defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
+# defaults write -g InitialKeyRepeat -int 12 # normal minimum is 15 (225 ms)
+# defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
 
 # Change minimize/maximize window effect
 defaults write com.apple.dock mineffect -string "scale"

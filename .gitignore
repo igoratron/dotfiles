@@ -2,6 +2,7 @@ coc/
 configstore/
 fzf-history/
 karabiner/automatic_backups/
-nvim/
+nvim/plugins
+nvim/autoload
 tmux/plugins/
 bash/secrets

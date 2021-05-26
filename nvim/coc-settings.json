@@ -1,0 +1,19 @@
+{
+  "languageserver": {
+    "terraform": {
+      "command": "terraform-ls",
+      "args": ["serve"],
+      "filetypes": [
+        "terraform",
+        "tf"
+      ],
+      "initializationOptions": {},
+      "settings": {}
+    }
+  },
+  "python.pythonPath": "/Users/czerwinskiigor/Library/Caches/pypoetry/virtualenvs/leakstop-data-engine-qJxQgZSH-py3.9/bin/python",
+  "python.formatting.provider": "black",
+  "python.linting.flake8Enabled": true,
+  "python.analysis.diagnosticMode": "workspace",
+  "coc.preferences.formatOnSaveFiletypes": ["python", "terraform"]
+}

@@ -5,20 +5,18 @@ call plug#begin('~/.config/nvim/plugins')
  Plug 'Raimondi/delimitMate'
  Plug 'SirVer/ultisnips'
  Plug 'Yggdroot/indentLine'
- Plug 'benekastah/neomake'
  Plug 'benmills/vimux'
  Plug 'hail2u/vim-css3-syntax', { 'for': 'css'}
  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
  Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
  Plug 'kshenoy/vim-signature'
- Plug 'ludovicchabant/vim-gutentags'
  Plug 'machakann/vim-highlightedyank'
- Plug 'mattn/emmet-vim'
+ Plug 'mattn/emmet-vim', { 'for': 'html' }
  Plug 'mhinz/vim-grepper'
  Plug 'neoclide/coc.nvim', {'branch': 'release'}
  Plug 'rhysd/clever-f.vim'
  Plug 'sheerun/vim-polyglot'
- Plug 'sonph/onehalf', {'rtp': 'vim/'}
+ Plug 'dracula/vim', { 'as': 'dracula' }
  Plug 'tpope/vim-commentary'
  Plug 'tpope/vim-fugitive'
  Plug 'tpope/vim-repeat'
@@ -28,6 +26,8 @@ call plug#begin('~/.config/nvim/plugins')
  Plug 'tpope/vim-vinegar'
  Plug 'wellle/context.vim'
  Plug 'wellle/targets.vim'
+ Plug 'Vimjas/vim-python-pep8-indent', { 'for': 'python' }
+ Plug 'arthurxavierx/vim-caser'
 call plug#end()
 " }}}
 
@@ -53,14 +53,12 @@ set undofile                " Save undo's after file closes
 set undolevels=1000         " How many undos
 set undoreload=10000        " number of lines to save for undo
 set inccommand=split
-set t_Co=256
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set termguicolors
 set splitbelow
 set splitright
 set showbreak=↪\ 
 set wildignore+=node_modules,dist
+set shm+=I
 "
 "disable unused plugin providers
 let g:loaded_node_provider = 1
@@ -72,13 +70,13 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 " }}}
 
 " {{{ Theme
-colorscheme onehalfdark
+colorscheme dracula
 set background=dark
 " }}}
 
 " {{{ Autocommands
 autocmd FileType gitcommit setlocal spell
-autocmd! BufWritePost,BufReadPost * Neomake
+" autocmd! BufWritePost,BufReadPost * Neomake
 autocmd BufWritePost .vimrc source $MYVIMRC
 
 augroup LineNumbers
@@ -237,6 +235,8 @@ vnoremap <leader>dp :diffput 1<CR>
 
 "coc
 nmap <silent> gd <Plug>(coc-definition)
+inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm()
+      \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 "vimux
 autocmd FileType javascript nnoremap <buffer> <leader>r :VimuxRunCommand('npx jest --testRegex ' . expand('%'))<CR>

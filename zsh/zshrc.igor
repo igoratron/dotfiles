@@ -1,0 +1,39 @@
+# vim: fdm=marker
+
+export PATH="/usr/local/opt/openssl/bin:$PATH"
+export VISUAL=nvim
+export EDITOR=$VISUAL
+export GIT_EDITOR=nvim
+export NVM_DIR="$HOME/.nvm"
+
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+eval "$(pyenv init -)"
+
+setopt PROMPT_SUBST
+
+function __show_branch() {
+  echo $(current_branch | awk '{print " "$0" "}')
+}
+
+function __show_jobs() {
+  echo $(jobs | cut -d\  -f1,6- | sed 's/\[\([0-9]\)]/\1:/' | xargs echo )
+}
+
+PROMPT='%~%F{240} $(__show_branch) $(__show_jobs)'$'\n''%F{42}≫ %f'
+RPROMPT="%F{240}%*%f"
+
+# {{{ Alias configuration
+
+alias vim="nvim"
+alias compose="docker-compose"
+
+alias npm-run="cat package.json | jq '.scripts' | tail -n +2 | tail -r | tail -n +2 | cut -d '\"' -f 2 | fzf | xargs npm run"
+alias git-show="git log --oneline | fzf --preview 'echo {} | cut -d \" \" -f 1 | xargs git show | diff-so-fancy' | cut -d \" \" -f 1 | xargs git show"
+alias resolve-conflict='git st -s | grep '\''UU'\'' | tail -n 1 | awk '\''{print $2}'\'' | xargs -o nvim +Gvdiffsplit!'
+alias tree='tree -I node_modules'
+
+alias pr="poetry run"
+
+# }}}

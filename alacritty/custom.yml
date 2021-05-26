@@ -1,0 +1,12 @@
+window:
+  padding:
+    x: 5
+    y: 5
+  dynamic_padding: false
+  decorations: none
+  startup_mode: Maximized
+
+font:
+  normal:
+    family: Inconsolata Nerd Font Mono
+  size: 14.0

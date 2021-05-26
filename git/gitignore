@@ -4,3 +4,4 @@ tags
 .DS_Store
 vendor/bundle
 jsconfig.json
+.vim

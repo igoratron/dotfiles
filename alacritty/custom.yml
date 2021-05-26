@@ -10,3 +10,10 @@ font:
   normal:
     family: Inconsolata Nerd Font Mono
   size: 14.0
+shell:
+  program: /bin/zsh
+  args:
+    - -l
+    - -c
+    - "tmux new -As0"
+

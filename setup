@@ -34,7 +34,7 @@ ln -s ~/.config/tmux/tmux.conf ~/.tmux.conf
 ln -s ~/.config/bash/bash_profile ~/.bash_profile
 ln -s ~/.config/git/gitconfig ~/.gitconfig
 ln -s ~/.config/git/gitignore ~/.gitignore
-ln -s ~/.config/.ctags ~/.ctags
+ln -s ~/.config/mtmr/items.json ~/Library/Application\ Support/MTMR/items.json
 
 # Set MacOS defaults
 osascript -e 'tell application "System Preferences" to quit'

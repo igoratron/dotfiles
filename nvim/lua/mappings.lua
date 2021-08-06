@@ -24,8 +24,7 @@ key_mapper('n', '<leader>v', ':tabedit $MYVIMRC<CR>')
 key_mapper('n', '<leader>zc', ':setlocal fdm=indent<CR>')
 
 -- copy paste from clipboard
-key_mapper('n', '<leader>y', '"*y')
-key_mapper('i', '<leader>p', '"*p')
+key_mapper('v', '<leader>y', '"*y')
 
 --copy file name
 key_mapper('n', '<leader>yfn', ':! echo % | pbcopy<CR>')

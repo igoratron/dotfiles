@@ -1,5 +1,6 @@
 brew "bat"
 brew "diff-so-fancy"
+brew "dockutil"
 brew "fzf"
 brew "jq"
 brew "neovim"

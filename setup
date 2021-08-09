@@ -39,3 +39,15 @@ defaults write com.apple.dock autohide -bool true
 
 # Set MacOS defaults
 osascript -e 'tell application "System Preferences" to quit'
+
+# Set the dock to autohide
+defaults write com.apple.Dock autohide 1
+
+# Put dock on the left
+defaults write com.apple.dock "orientation" -string "left"
+
+dockutil --remove all
+dockutil --add /Applications/Alacritty.app
+dockutil --add /Applications/Firefox.app
+dockutil --add /Applications/Slack.app
+killall Dock

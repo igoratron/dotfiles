@@ -16,4 +16,5 @@ shell:
     - -l
     - -c
     - "tmux new -As0"
-
+key_bindings:
+  - { key: Key3,     mods: Alt,     chars: "#"                        }

@@ -59,5 +59,23 @@
     "longAction": "shellScript",
     "longExecutablePath": "/usr/bin/pmset",
     "longShellArguments": ["sleepnow"]
+  },
+  {
+    "type": "staticButton",
+    "bordered": false,
+    "align": "right",
+    "title": "",
+    "image": {
+      "filePath": "~/Pictures/accountImage.jpg"
+    },
+    "actions": [ 
+      {
+        "trigger": "longTap",
+        "action": "appleScript",
+        "actionAppleScript": {
+          "inline": "tell application \"System Events\"\rtell its application process \"ControlCenter\"\rtell its menu bar 1\rclick its menu bar item \"User\"\rend tell\rtell its window\rclick button \"Login Window…\" of its group\rend tell\rend tell\rend tell"
+        }
+      }
+    ]
   }
 ]

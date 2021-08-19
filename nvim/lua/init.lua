@@ -8,6 +8,7 @@ vim.o.hidden = true
 vim.o.ignorecase = true
 vim.o.inccommand = 'nosplit'
 vim.o.incsearch = true
+vim.o.linebreak = true
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.shiftwidth = 2
@@ -26,7 +27,7 @@ vim.o.termguicolors = true
 vim.o.undodir = vim.fn.stdpath('config') .. '/undodir'
 vim.o.undofile = true
 vim.o.updatetime = 300
-vim.o.wrap = false
+vim.o.wrap = true
 vim.o.writebackup = false
 
 vim.opt.listchars = {

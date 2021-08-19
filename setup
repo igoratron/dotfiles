@@ -25,6 +25,9 @@ vim +PackerSync +qa
 # install node
 nvm install 15
 
+# profile image
+dscl . -read /Users/${USER} JPEGPhoto | tail -1 | xxd -r -p > ${HOME}/Pictures/accountImage.jpg
+
 # aliases
 ln -s ~/.config/tmux/tmux.conf ~/.tmux.conf
 ln -s ~/.config/git/gitconfig ~/.gitconfig

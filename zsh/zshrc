@@ -17,6 +17,7 @@ ZSH_THEME="robbyrussell"
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
+
 # CASE_SENSITIVE="true"
 
 # Uncomment the following line to use hyphen-insensitive completion.
@@ -72,8 +73,9 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git fzf)
 
+export ZSH_DISABLE_COMPFIX="true"
 source $ZSH/oh-my-zsh.sh
-source ~/.zshrc.igor
+source ~/.config/zsh/zshrc.igor
 
 # User configuration
 

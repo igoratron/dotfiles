@@ -34,6 +34,13 @@ alias git-show="git log --oneline | fzf --preview 'echo {} | cut -d \" \" -f 1 |
 alias resolve-conflict='git st -s | grep '\''UU'\'' | tail -n 1 | awk '\''{print $2}'\'' | xargs -o nvim +Gvdiffsplit!'
 alias tree='tree -I node_modules'
 
-alias pr="poetry run"
+select-aws-account() {
+  export AWS_PROFILE=$(cat ~/.aws/config | rg -o 'profile (.*)]' -r '$1' | fzf)
+  if ! yawsso --profile $AWS_PROFILE; then
+    aws sso login
+    yawsso --profile $AWS_PROFILE;
+  fi
+  echo "AWS_PROFILE set to $AWS_PROFILE"
+}
 
 # }}}

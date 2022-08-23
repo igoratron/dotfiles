@@ -12,6 +12,8 @@ require('packer').startup(function()
   use 'tpope/vim-surround'
   use 'tpope/vim-unimpaired'
   use 'tpope/vim-vinegar'
+  use 'ayu-theme/ayu-vim'
+  use 'arzg/vim-colors-xcode'
   use 'arthurxavierx/vim-caser'
   use "steelsojka/pears.nvim"
   use 'romgrk/nvim-treesitter-context'
@@ -91,7 +93,7 @@ require "pears".setup()
 -- {{{ Lualine
 require('lualine').setup{
   options = {
-    theme = 'dracula',
+    theme = 'ayu_light',
     section_separators = '',
     component_separators = '',
   },

@@ -42,3 +42,7 @@ key_mapper('n', '<leader>dol', ':diffget //2<CR>')
 key_mapper('n', '<leader>dor', ':diffget //3<CR>')
 key_mapper('n', '<leader>dol', ':diffget //2<CR>')
 key_mapper('n', '<leader>dp', ':diffput 1<CR>')
+
+-- coc
+key_mapper('n', 'gd', ':call CocActionAsync(\'jumpDefinition\')<CR>')
+key_mapper('n', '<leader>ac', '<Plug>(coc-codeaction)')

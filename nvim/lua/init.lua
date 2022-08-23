@@ -50,4 +50,4 @@ vim.g.maplocalleader = ' '
 require 'plugins'
 require 'mappings'
 
-pcall(vim.cmd, [[colorscheme dracula]])
+pcall(vim.cmd, [[colorscheme xcodelighthc]])

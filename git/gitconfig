@@ -15,10 +15,12 @@
 [user]
   name = Igor Czerwinski
   email = 657586+igoratron@users.noreply.github.com
+	signingkey = 5634CF5B2BB3D3ACA1268E7A7E6BFF8C6FBA12F9
 [core]
   excludesfile = ~/.gitignore 
   editor = nvim
   pager = diff-so-fancy | less --tabs=4 -RFX
+	autocrlf = false
 [difftool "sourcetree"]
   cmd = opendiff \"$LOCAL\" \"$REMOTE\"
   path = 
@@ -46,3 +48,7 @@
   whitespace = red reverse
 [url "git@github.com:"]
   insteadOf = "https://github.com/"
+[commit]
+	gpgsign = true
+[gpg]
+	program = gpg

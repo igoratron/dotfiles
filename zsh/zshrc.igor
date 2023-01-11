@@ -1,13 +1,15 @@
 # vim: fdm=marker
-
+eval "$(/opt/homebrew/bin/brew shellenv)"
 export PATH="/usr/local/opt/openssl/bin:$PATH"
 export VISUAL=nvim
 export EDITOR=$VISUAL
 export GIT_EDITOR=nvim
 export NVM_DIR="$HOME/.nvm"
+export GPG_TTY=$(tty)
+export FZF_BASE=/opt/homebrew/bin
 
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completionqqqqqqq
 
 eval "$(pyenv init -)"
 
@@ -43,4 +45,8 @@ select-aws-account() {
   echo "AWS_PROFILE set to $AWS_PROFILE"
 }
 
+alias server-yarn="yarn --cmd ~/Development/flash-pack-dot-com/server"
+alias client-yarn="yarn --cmd ~/Development/flash-pack-dot-com/client"
+
 # }}}
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"

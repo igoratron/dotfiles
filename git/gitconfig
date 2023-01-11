@@ -15,7 +15,7 @@
 [user]
   name = Igor Czerwinski
   email = 657586+igoratron@users.noreply.github.com
-	signingkey = 5634CF5B2BB3D3ACA1268E7A7E6BFF8C6FBA12F9
+	signingkey = 0B0010A4
 [core]
   excludesfile = ~/.gitignore 
   editor = nvim
@@ -51,4 +51,4 @@
 [commit]
 	gpgsign = true
 [gpg]
-	program = gpg
+	program = /opt/homebrew/bin/gpg

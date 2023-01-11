@@ -780,30 +780,30 @@ import:
   # Print all received window events.
   #print_events: false
 colors:
-  name: Default (light)
-  author: Chris Kempson
+  # Default colors
   primary:
-    background: "#f5f5f5"
-    foreground: "#303030"
-  cursor:
-    text: "#f5f5f5"
-    cursor: "#303030"
+    background: '#282a36'
+    foreground: '#f8f8f2'
+
+  # Normal colors
   normal:
-    black: "#151515"
-    red: "#ac4142"
-    green: "#90a959"
-    yellow: "#f4bf75"
-    blue: "#6a9fb5"
-    magenta: "#aa759f"
-    cyan: "#75b5aa"
-    white: "#d0d0d0"
+    black: '#000000'
+    red: '#ff5555'
+    green: '#50fa7b'
+    yellow: '#f1fa8c'
+    blue: '#caa9fa'
+    magenta: '#ff79c6'
+    cyan: '#8be9fd'
+    white: '#bfbfbf'
+
+  # Bright colors
   bright:
-    black: "#505050"
-    red: "#ac4142"
-    green: "#90a959"
-    yellow: "#f4bf75"
-    blue: "#6a9fb5"
-    magenta: "#aa759f"
-    cyan: "#75b5aa"
-    white: "#f5f5f5"
-theme: Default.light
+    black: '#575b70'
+    red: '#ff6e67'
+    green: '#5af78e'
+    yellow: '#f4f99d'
+    blue: '#caa9fa'
+    magenta: '#ff92d0'
+    cyan: '#9aedfe'
+    white: '#e6e6e6'
+theme: Dracula

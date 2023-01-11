@@ -25,6 +25,7 @@ require('packer').startup(function()
   use { 'junegunn/goyo.vim', cmd = 'Goyo' }
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use { 'dracula/vim', as = 'dracula'}
+  use { 'simnalamburt/vim-mundo' }
   use {
     'hoob3rt/lualine.nvim',
     requires = {'kyazdani42/nvim-web-devicons', opt = true}

@@ -11,5 +11,5 @@
       "settings": {}
     }
   },
-  "coc.preferences.formatOnSaveFiletypes": ["python", "terraform"]
+  "coc.preferences.formatOnSaveFiletypes": ["python", "terraform", "typescript", "javascript", "typescriptreact"]
 }

@@ -2,6 +2,7 @@
 set -euxo pipefail
 
 # clone this repo
+# install xcode
 git clone https://github.com/igoratron/dotfiles.git ~/.config
 
 # install Brew
@@ -11,6 +12,9 @@ git clone https://github.com/igoratron/dotfiles.git ~/.config
 cd ~/.config
 brew bundle
 pip3 install pynvim
+
+# install OMZ
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # install tmux plugin manager
 git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm

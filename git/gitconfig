@@ -15,18 +15,20 @@
 [user]
   name = Igor Czerwinski
   email = 657586+igoratron@users.noreply.github.com
-	signingkey = 5634CF5B2BB3D3ACA1268E7A7E6BFF8C6FBA12F9
+	signingkey = 503F3D3341B35526
 [core]
   excludesfile = ~/.gitignore 
   editor = nvim
-  pager = diff-so-fancy | less --tabs=4 -RFX
-	autocrlf = false
-[difftool "sourcetree"]
-  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-  path = 
-[mergetool "sourcetree"]
-  cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-  trustExitCode = true
+	pager = diff-so-fancy | less --tabs=4 -RFX
+  autocrlf = false
+[diff]
+  tool = difftastic
+[difftool]
+  prompt = false
+[difftool "difftastic"]
+  cmd = difft "$LOCAL" "$REMOTE"
+[pager]
+  difftool = true
 [push]
   default = current
 [filter "lfs"]
@@ -52,3 +54,5 @@
 	gpgsign = true
 [gpg]
 	program = gpg
+[interactive]
+	diffFilter = diff-so-fancy --patch

@@ -35,6 +35,19 @@ alias git-show="git log --oneline | fzf --preview 'echo {} | cut -d \" \" -f 1 |
 alias resolve-conflict='git st -s | grep '\''UU'\'' | tail -n 1 | awk '\''{print $2}'\'' | xargs -o nvim +Gvdiffsplit!'
 alias tree='tree -I node_modules'
 
+function set-theme() {
+  unset I_THEME
+  if defaults read -g AppleInterfaceStyle 2>&1 | grep -iq 'dark'; then
+    export I_THEME="dark"
+    sed "s/{theme}/dark/" ~/.config/alacritty/alacritty.toml.tmpl > ~/.config/alacritty/alacritty.toml
+  else
+    export I_THEME="light"
+    sed "s/{theme}/light/" ~/.config/alacritty/alacritty.toml.tmpl > ~/.config/alacritty/alacritty.toml
+  fi
+}
+
+set-theme
+
 select-aws-account() {
   export AWS_PROFILE=$(cat ~/.aws/config | rg -o 'profile (.*)]' -r '$1' | fzf)
   if ! yawsso --profile $AWS_PROFILE; then

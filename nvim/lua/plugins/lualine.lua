@@ -1,9 +1,8 @@
 return { 
   'nvim-lualine/lualine.nvim',
-  event = "VeryLazy",
   opts = {
     options = {
-      theme = 'ayu_light',
+      theme = 'auto',
       section_separators = '',
       component_separators = '',
     },

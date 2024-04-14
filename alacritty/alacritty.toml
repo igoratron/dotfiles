@@ -1,0 +1,1 @@
+import = ["~/.config/alacritty/light.toml", "~/.config/alacritty/custom.toml"]

@@ -22,7 +22,7 @@ vim.o.mouse = 'a'
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.scrolloff = 1
-vim.o.shortmess = vim.o.shortmess .. "c"
+vim.o.shortmess = vim.o.shortmess .. "Ic"
 vim.o.showbreak = '↪ '
 vim.o.signcolumn = 'yes'
 vim.o.smartcase = true
@@ -52,3 +52,9 @@ vim.opt.listchars = {
   extends   = '⟩'   ,
   precedes  = '⟨'   ,
 }
+
+
+-- new
+vim.opt.cursorline = true
+vim.opt.spelloptions = 'camel'
+vim.opt.spell = true

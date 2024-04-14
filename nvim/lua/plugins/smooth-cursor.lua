@@ -1,6 +1,7 @@
-return { 'gen740/SmoothCursor.nvim',
+return {
+  'gen740/SmoothCursor.nvim',
   opts = {
-    cursor = '►',
+    cursor = '▶︎',
     linehl = 'CursorLine',
   },
   event = "BufReadPost"

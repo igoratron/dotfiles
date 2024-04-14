@@ -56,6 +56,17 @@
         })
       end, { desc = '[/] Fuzzily search in current buffer' })
 
+    -- { '<leader>sf', function() require('telescope.builtin').find_files() end, { desc = '[S]earch [F]iles' }},
+    -- { '<leader>sh', function() require('telescope.builtin').help_tags() end, { desc = '[S]earch [H]elp' }},
+    -- { '<leader>sw', function() require('telescope.builtin').grep_string() end, { desc = '[S]earch current [W]ord' }},
+    -- { '<leader>sc', function() require('telescope.builtin').grep_string({ search = vim.fn.expand('%:t:r') }) end, { desc = '[S]earch  for [C]urrent file name' }},
+    -- { '<leader>sg', function() require('telescope.builtin').live_grep() end, { desc = '[S]earch by [G]rep' }},
+    -- { '<leader>sd', function() require('telescope.builtin').diagnostics() end, { desc = '[S]earch [D]iagnostics' }},
+    -- { '<leader>sr', function() require('telescope.builtin').resume() end, { desc = '[S]earch [R]esume' }},
+    -- { '<leader>sb', function() require('telescope.builtin').current_buffer_fuzzy_find() end, { desc = '[S]earch current [B]uffer' }},
+    -- { '<leader>sm', function() require('telescope.builtin').marks() end, { desc = '[S]earch [M]ark' }},
+    -- { '<leader>st', function() require('telescope.builtin').treesitter() end, { desc = '[S]earch [T]reesitter' }},
+
       -- It's also possible to pass additional configuration options.
       --  See `:help telescope.builtin.live_grep()` for information about particular keys
       vim.keymap.set('n', '<leader>s/', function()

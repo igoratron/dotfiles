@@ -5,3 +5,8 @@ tags
 vendor/bundle
 jsconfig.json
 .vim
+cspell.json
+
+.rgignore
+.rubocop.yml
+.solargraph.yml

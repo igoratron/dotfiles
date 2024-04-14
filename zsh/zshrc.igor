@@ -10,6 +10,7 @@ export GPG_TTY=$(tty)
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
 
+eval "$(zoxide init zsh)"
 eval "$(pyenv init -)"
 
 setopt PROMPT_SUBST
@@ -24,6 +25,10 @@ function __show_jobs() {
 
 PROMPT='%~%F{240} $(__show_branch) $(__show_jobs)'$'\n''%F{42}≫ %f'
 RPROMPT="%F{240}%*%f"
+
+function oe {
+  okteto exec "$*"
+}
 
 # {{{ Alias configuration
 

@@ -14,7 +14,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set('n', '<leader>w', vim.cmd.wa)
 
 -- disable search highlight
-vim.keymap.set('n', '<leader>jk', vim.cmd.nohlsearch)
+vim.keymap.set('n', '<leader>jk', ':nohlsearch | :pclose | :cclose<CR>')
 vim.keymap.set('n', '<leader><esc>', vim.cmd.nohlsearch)
 
 -- open vimrc
@@ -51,3 +51,13 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
+
+-- 
+vim.keymap.set("n", "vgd", ":vs | norm gd<CR>")
+
+
+-- grep with selection
+vim.keymap.set('v', '/', 'y:Telescope live_grep default_text=<c-r>0<CR>')
+vim.keymap.set('v', '<leader>sf', 'y<ESC>:Telescope find_files default_text=<c-r>0<CR>')
+
+vim.keymap.set("x", "<leader>p", '\"_dP', { desc = "Space paste" })

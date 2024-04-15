@@ -13,6 +13,9 @@ mods = "Alt"
 args = ["-l", "-c", "tmux new -As0"]
 program = "/bin/zsh"
 
+[env]
+TERM = "xterm-256color"
+
 [window]
 decorations = "none"
 dynamic_padding = false

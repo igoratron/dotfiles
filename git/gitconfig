@@ -6,8 +6,8 @@
   lease-push = push --force-with-lease
   rbi = rebase -i
   rb = rebase
-  rbim = ! git fetch && git rebase -i origin/main
-  rbm = ! git fetch && git rebase origin/main
+  rbim = ! git fetch && git rebase -i origin/master
+  rbm = ! git fetch && git rebase origin/master
   fp = fetch -p
   d = diff
   dc = diff --cached
@@ -19,16 +19,8 @@
 [core]
   excludesfile = ~/.gitignore 
   editor = nvim
-	pager = diff-so-fancy | less --tabs=4 -RFX
   autocrlf = false
-[diff]
-  tool = difftastic
-[difftool]
-  prompt = false
-[difftool "difftastic"]
-  cmd = difft "$LOCAL" "$REMOTE"
-[pager]
-  difftool = true
+  pager = delta
 [push]
   default = current
 [filter "lfs"]
@@ -36,21 +28,23 @@
   process = git-lfs filter-process
   required = true
   clean = git-lfs clean -- %f
-[color "diff-highlight"]
-  oldNormal = red bold
-  oldHighlight = red bold 52
-  newNormal = green bold
-  newHighlight = green bold 22
-[color "diff"]
-  meta = 227
-  frag = magenta bold
-  commit = 227 bold
-  old = red bold
-  new = green bold
-  whitespace = red reverse
 [url "git@github.com:"]
   insteadOf = "https://github.com/"
 [gpg]
 	program = gpg
+[init]
+	templateDir = ~/dotfiles/.git-template
+
 [interactive]
-	diffFilter = diff-so-fancy --patch
+    diffFilter = delta --color-only
+
+[delta]
+  navigate = true    # use n and N to move between diff sections
+  side-by-side = false
+
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default

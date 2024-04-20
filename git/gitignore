@@ -10,3 +10,4 @@ cspell.json
 .rgignore
 .rubocop.yml
 .solargraph.yml
+.ignore
